@@ -1,2 +1,5 @@
 # D-Noice
-Grayscale image denoising with Median, Adaptive Median, and Gaussian filters, evaluated using PSNR and SSIM.
+
+> Less noise. More noice.
+
+D-Noice adalah proyek perbandingan Median Filter, Adaptive Median Filter, dan Gaussian Filter untuk mengurangi salt-and-pepper noise pada citra grayscale, dengan evaluasi menggunakan PSNR dan SSIM.
