@@ -14,4 +14,7 @@ __pycache__/
 hasil/
 papers_denoising.zip
 D-Noise/
+graphify-out/
+.DS_Store
+
 

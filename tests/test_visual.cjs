@@ -1,5 +1,4 @@
-// Code-level integration tests; this does not open or render a browser.
-const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const nodes=new Map(),requests=[];
 function el(key){
   if(!nodes.has(key)){
@@ -35,7 +34,8 @@ const sandbox={Intl,Blob,URL,TextDecoder,Uint8Array,setTimeout,clearTimeout,cons
     let start=0;
     return {ok:true,body:new ReadableStream({pull(controller){if(start>=bytes.length){controller.close();return}controller.enqueue(bytes.slice(start,start+47));start+=47;}})};
   }};
-vm.createContext(sandbox);vm.runInContext(fs.readFileSync('app.js','utf8')+'\n'+fs.readFileSync('charts.js','utf8'),sandbox);
+const rootDir=path.resolve(__dirname,'..');
+vm.createContext(sandbox);vm.runInContext(fs.readFileSync(path.join(rootDir,'app.js'),'utf8')+'\n'+fs.readFileSync(path.join(rootDir,'charts.js'),'utf8'),sandbox);
 const evaluate=code=>vm.runInContext(code,sandbox);
 async function main(){
   await new Promise(setImmediate);requests.length=0;
