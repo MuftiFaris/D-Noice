@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="Ruang Citra adalah studio interaktif untuk membandingkan metode penghilangan noise pada gambar.">
+  <title>Ruang Citra — Studio Analisis Gambar</title>
+  <link rel="stylesheet" href="/research.css">
+  <link rel="stylesheet" href="/research-tweaks.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#atas" aria-label="Ruang Citra, beranda"><span class="brand-symbol">RC</span><span>RUANG CITRA <small>STUDIO ANALISIS GAMBAR</small></span></a>
+    <nav aria-label="Navigasi halaman"><a href="#pilih-gambar">Pilih gambar</a><a href="#hasil">Hasil eksperimen</a><a href="#metode">Tentang metode</a></nav>
+    <span class="dataset-status"><i></i> SET12 <b>12 GAMBAR UJI</b></span>
+  </header>
+  <main id="atas">
+    <section class="intro wrap">
+      <div class="intro-copy"><span class="kicker"><b>01</b> PEMULIHAN CITRA / IMAGE RESTORATION</span><h1>Melihat gambar.<br><em>Memahami noise.</em></h1><p>Pilih citra uji, tambahkan bintik hitam-putih, lalu bandingkan cara tiga filter membersihkannya.</p><a class="text-arrow" href="#pilih-gambar">Mulai dengan memilih gambar <span>↓</span></a></div>
+      <div class="intro-figure"><div class="figure-label"><span>LEMBAR OBSERVASI</span><span>GRAYSCALE · 8-BIT</span></div><div class="figure-images"><figure><img src="/data/Set12/01.png" alt="Gambar penuh nomor satu dari Set12"><figcaption>GAMBAR PENUH <b>01 / 12</b></figcaption></figure><div class="figure-separator"><span>DETAIL</span><i>→</i></div><figure class="figure-detail"><img src="/data/Set12/01.png" alt="Bagian gambar Set12 yang diperbesar"><figcaption>PEMBESARAN <b>AREA TENGAH</b></figcaption></figure></div><div class="figure-note"><span>DATASET UJI STANDAR</span><span>CONTOH CITRA · TANPA PEMROSESAN</span></div></div>
+    </section>
+
+    <section class="workspace wrap" id="pilih-gambar">
+      <div class="section-head"><div class="section-number">01</div><div><span class="kicker">PILIH CITRA UJI</span><h2>Mulai dari sebuah gambar.</h2><p>Jelajahi gambar Set12. Buka pratinjau untuk melihatnya lebih besar, lalu konfirmasi pilihan Anda.</p></div></div>
+      <div class="picker-layout">
+        <div class="gallery-panel"><div class="panel-topline"><span>GALERI SET12</span><span id="gallery-count">MEMUAT GAMBAR…</span></div><div id="image-gallery" class="image-gallery" aria-label="Galeri citra Set12"></div><div class="gallery-foot">Pilih thumbnail untuk membuka pratinjau. Gambar belum digunakan sampai dikonfirmasi.</div></div>
+        <aside class="preview-panel" aria-label="Pratinjau gambar"><div class="preview-top"><span>PRATINJAU GAMBAR</span><span class="preview-state" id="preview-state">BELUM DIPILIH</span></div><div class="preview-canvas"><div id="preview-empty" class="preview-empty"><span class="preview-cross">＋</span><p>Pilih satu gambar<br>di galeri untuk melihat preview.</p></div><img id="preview-image" alt="Pratinjau gambar pilihan" hidden></div><div class="preview-info"><div><span>NAMA FILE</span><strong id="preview-name">—</strong></div><div><span>UKURAN GAMBAR</span><strong id="preview-size">—</strong></div><div><span>JENIS</span><strong>Grayscale · 8-bit</strong></div></div><button id="confirm-image" class="confirm-button" disabled>Gunakan gambar ini <span>→</span></button><p id="preview-hint" class="preview-hint">Gambar ini belum dipakai untuk eksperimen.</p></aside>
+      </div>
+      <div id="selected-banner" class="selected-banner" hidden><span class="selected-check">✓</span><div><small>GAMBAR ACUAN TERPILIH</small><strong id="selected-name">—</strong><span id="selected-dimensions">—</span></div><button id="change-image" class="change-button">Pilih gambar lain</button></div>
+    </section>
+
+    <section class="experiment-settings wrap" id="pengaturan">
+      <div class="section-head"><div class="section-number">02</div><div><span class="kicker">RANCANG PERCOBAAN</span><h2>Tambahkan noise.</h2><p>Atur tingkat gangguan dan pola acaknya. Pengolahan dimulai hanya setelah Anda menekan tombol.</p></div></div>
+      <div class="settings-grid"><div class="noise-setting"><span class="control-label">TINGKAT SALT-AND-PEPPER NOISE</span><div class="noise-options" role="group" aria-label="Tingkat noise"><button data-noise="5">5%</button><button class="active" data-noise="10">10%</button><button data-noise="20">20%</button><button data-noise="30">30%</button></div><p id="noise-explainer">10% berarti sekitar 10 dari setiap 100 piksel diubah menjadi hitam atau putih.</p></div><label class="seed-setting"><span class="control-label">SEED / POLA ACAK</span><input id="seed-input" type="number" value="42" min="0" max="2147483647"><small>Gunakan seed yang sama untuk mengulang pola noise yang sama.</small></label><div class="run-setting"><span class="control-label">LANGKAH BERIKUTNYA</span><button id="run-button" class="run-button" disabled><span>Jalankan eksperimen</span><b>→</b></button><small id="run-hint">Pilih dan konfirmasi gambar terlebih dahulu.</small></div></div>
+      <div id="status" class="status" aria-live="polite"></div>
+    </section>
+
+    <section class="results wrap" id="hasil">
+      <div class="section-head"><div class="section-number">03</div><div><span class="kicker">HASIL PEMROSESAN</span><h2>Perhatikan perubahannya.</h2><p id="image-meta">Hasil gambar akan muncul di sini setelah eksperimen dijalankan.</p></div><button id="download-csv" class="download-button" disabled>Unduh tabel CSV <span>↓</span></button></div>
+      <div class="result-strip"><figure><div class="result-image"><div class="image-empty">MENUNGGU PERCOBAAN</div><img data-result="original" alt="Gambar acuan bersih" hidden></div><figcaption><span><b>01</b> ACUAN</span><strong>Gambar bersih</strong></figcaption></figure><figure><div class="result-image"><div class="image-empty">MENUNGGU PERCOBAAN</div><img data-result="noisy" alt="Gambar setelah ditambah noise" hidden></div><figcaption><span><b>02</b> GANGGUAN</span><strong>Salt-and-pepper</strong></figcaption></figure><figure><div class="result-image"><div class="image-empty">MENUNGGU PERCOBAAN</div><img data-result="method0" alt="Hasil Median Filter" hidden></div><figcaption><span><b>03</b> FILTER A</span><strong>Median 3×3</strong></figcaption></figure><figure><div class="result-image"><div class="image-empty">MENUNGGU PERCOBAAN</div><img data-result="method1" alt="Hasil Adaptive Median Filter" hidden></div><figcaption><span><b>04</b> FILTER B</span><strong>Adaptive Median</strong></figcaption></figure><figure><div class="result-image"><div class="image-empty">MENUNGGU PERCOBAAN</div><img data-result="method2" alt="Hasil Gaussian Filter" hidden></div><figcaption><span><b>05</b> FILTER C</span><strong>Gaussian 3×3</strong></figcaption></figure></div>
+      <div class="comparison-grid"><div class="score-table-wrap"><div class="subhead"><span>PERBANDINGAN METRIK</span><span id="summary-noise">BELUM ADA HASIL</span></div><table class="score-table"><thead><tr><th>METODE</th><th>PSNR <small>dB</small></th><th>SSIM <small>0—1</small></th></tr></thead><tbody id="metrics-body"><tr><td>Median Filter</td><td>—</td><td>—</td></tr><tr><td>Adaptive Median</td><td>—</td><td>—</td></tr><tr><td>Gaussian Filter</td><td>—</td><td>—</td></tr></tbody></table><p class="table-explainer">PSNR menilai selisih nilai piksel. SSIM menilai kemiripan kecerahan, kontras, dan pola.</p></div><div class="bars-wrap"><div class="subhead"><span>SKALA PER METRIK</span><span>PANJANG BATANG TERNORMALISASI</span></div><div class="bar-group"><h3>PSNR <small>dB · makin tinggi makin baik</small></h3><div id="psnr-bars"></div></div><div class="bar-group"><h3>SSIM <small>mendekati 1 makin baik</small></h3><div id="ssim-bars"></div></div></div></div>
+    </section>
+
+    <section class="math-section wrap" id="perhitungan">
+      <div class="section-head"><div class="section-number">04</div><div><span class="kicker">RINCIAN PERHITUNGAN</span><h2>Angka, langkah demi langkah.</h2><p>Semua angka berikut dihitung dari gambar eksperimen yang sedang aktif.</p></div></div>
+      <div class="math-toolbar"><label for="method-select">PILIH HASIL FILTER</label><select id="method-select"><option>Median Filter</option><option>Adaptive Median</option><option>Gaussian Filter</option></select><details><summary>Apa arti singkatan ini?</summary><p>μ adalah rata-rata kecerahan. σ² adalah variasi yang berhubungan dengan kontras. σₐᵦ adalah kovariansi yang membandingkan pola dua blok.</p></details></div>
+      <div id="calculation-content" class="calculation-content"><div class="calculation-placeholder">Jalankan eksperimen untuk melihat perhitungan aktual.</div></div>
+      <p class="ssim-note">Catatan: SSIM di halaman ini dihitung pada blok 8×8 yang tidak tumpang tindih, kemudian nilai semua blok dirata-ratakan. Pengaturan ini dicantumkan agar hasil eksperimen dapat dijelaskan dan diulang.</p>
+    </section>
+
+    <section class="methodology wrap" id="metode"><div class="method-intro"><span class="kicker">CATATAN METODE</span><h2>Tiga filter.<br><em>Tiga pendekatan.</em></h2><p>Hasil terbaik dapat berubah menurut tingkat noise dan detail gambar. Bandingkan angka sekaligus lihat gambarnya.</p></div><div class="method-list"><article><span>01</span><div><h3>Median Filter</h3><p>Melihat 3×3 piksel, mengurutkannya, lalu memakai nilai tengah. Nilai bintik hitam/putih yang ekstrem jadi lebih mudah disisihkan.</p></div></article><article><span>02</span><div><h3>Adaptive Median</h3><p>Memperbesar jendela dari 3×3 hingga 7×7 ketika lingkungan kecil belum cukup untuk mengenali noise.</p></div></article><article><span>03</span><div><h3>Gaussian Lowpass 3×3</h3><p>Menggunakan contoh materi (K=1, σ=1). Bobot mentahnya 0.3679, 0.6065, dan 1.0000; setelah dinormalisasi, jumlah bobotnya menjadi 1. Bintik ekstrem tetap ikut memengaruhi rata-rata.</p></div></article></div><p class="source-note">Dataset Set12: <a href="https://github.com/cszn/FFDNet/tree/master/testsets/Set12" target="_blank" rel="noreferrer">repositori FFDNet ↗</a>. Gambar menjadi acuan bersih; salt-and-pepper noise dibuat oleh program.</p></section>
+  </main>
+  <footer class="site-footer"><a class="brand" href="#atas"><span class="brand-symbol">RC</span><span>RUANG CITRA <small>STUDIO ANALISIS GAMBAR</small></span></a><p>Alat belajar pemulihan citra · Implementasi filter dan metrik dibuat manual.</p><a href="#atas">Kembali ke atas ↑</a></footer>
+  <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Lihat gambar lebih besar"><button id="lightbox-close" class="lightbox-close" aria-label="Tutup">×</button><img alt="Gambar diperbesar"><span></span></div>
+</body>
+</html>
