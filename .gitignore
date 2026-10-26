@@ -1,5 +1,17 @@
-hasil/
+# Lingkungan virtual Python
+.venv/
+venv/
+
+# Cache Python
 __pycache__/
-*.pyc
-.DS_Store
-*.zip
+*.py[cod]
+
+# Pengaturan lokal editor
+.vscode/
+.idea/
+
+# Generated output & backups
+hasil/
+papers_denoising.zip
+D-Noise/
+
